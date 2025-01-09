@@ -20,7 +20,12 @@ This project is made as part of the _Agile Software Engineering_ module at the F
 
 ## How to start the project
 
-TBD
+### Frontend
+
+- make sure you have Node.js on your computer
+- `cd frontend`
+- `npm install` - install dependencies
+- `npm run dev` - run the frontend project
 
 ## Dependencies and used libraries
 
