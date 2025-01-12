@@ -15,10 +15,17 @@ function App() {
         {/* Header */}
         <Header />
         <Routes>
+          {/* Landing Page */}
           <Route path="/" element={<LandingPage />} />
+          
+          {/* Question Pages */}
           <Route path="/question1" element={<QuestionPage1 />} />
           <Route path="/question2" element={<QuestionPage2 />} />
+          
+          {/* Recommendation Page */}
           <Route path="/recommendation" element={<RecommendationPage />} />
+          
+          {/* Feedback Page */}
           <Route path="/feedback" element={<Feedback />} />
         </Routes>
         {/* Footer */}

@@ -89,7 +89,7 @@
   
   /* Responsive Styles */
   @media (max-width: 768px) {
-    .question2-page .icon-grid {
+    .question1-page .icon-grid {
       grid-template-columns: repeat(2, 1fr);
     }
   
