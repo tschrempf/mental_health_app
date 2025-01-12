@@ -1,16 +1,11 @@
 from flask import Flask, request, jsonify, g
 import sqlite3
-import requests
+from weather import weather_bp  # Import des Wetter-Blueprints
 
 app = Flask(__name__)
 
 # Absoluter Pfad zur SQLite-Datenbank (anpassen, falls nötig)
 DATABASE = '/path/to/your/Recommendation_Database.db'
-
-# Open-Meteo API-Details
-OPEN_METEO_URL = 'https://api.open-meteo.com/v1/forecast'
-LATITUDE = 48.2082  # Wien
-LONGITUDE = 16.3738  # Wien
 
 # Verbindung zur SQLite-Datenbank herstellen
 def get_db_connection():
@@ -25,52 +20,6 @@ def close_db_connection(exception):
     db = g.pop('db', None)
     if db is not None:
         db.close()
-
-# Funktion: Wetterdaten abrufen
-def fetch_weather():
-    params = {
-        'latitude': LATITUDE,
-        'longitude': LONGITUDE,
-        'current_weather': True
-    }
-    response = requests.get(OPEN_METEO_URL, params=params)
-    if response.status_code != 200:
-        return None, response.status_code
-    
-    weather_data = response.json()
-    weather_code = weather_data['current_weather']['weathercode']
-    
-    # Wettercode auf Wetterbedingungen mappen
-    weather_map = {
-        0: 'sonnig',
-        1: 'bewölkt',
-        2: 'bewölkt',
-        3: 'bewölkt',
-        45: 'bewölkt',
-        48: 'bewölkt',
-        51: 'regen',
-        53: 'regen',
-        55: 'regen',
-        61: 'regen',
-        63: 'regen',
-        65: 'regen',
-        66: 'regen',
-        67: 'regen',
-        71: 'schnee',
-        73: 'schnee',
-        75: 'schnee',
-        77: 'schnee',
-        80: 'regen',
-        81: 'regen',
-        82: 'regen',
-        85: 'schnee',
-        86: 'schnee',
-        95: 'regen',
-        96: 'regen',
-        99: 'regen'
-    }
-    weather = weather_map.get(weather_code, 'sonnig')  # Standard: sonnig
-    return weather, 200
 
 # Funktion: Optionen basierend auf Wetter abrufen
 def get_options_based_on_weather(weather):
@@ -109,19 +58,12 @@ def get_recommendations(weather, energy_level, interest):
 # Standardroute zur Überprüfung, ob die API läuft
 @app.route('/')
 def home():
-    return "API test"
-
-# Route: Wetterdaten abrufen
-@app.route('/weather', methods=['GET'])
-def weather_endpoint():
-    weather, status = fetch_weather()
-    if status != 200:
-        return jsonify({'error': 'Failed to fetch weather data'}), status
-    return jsonify({'city': 'Wien', 'weather': weather}), 200
+    return "TEST."
 
 # Route: Optionen abrufen
 @app.route('/options', methods=['GET'])
 def options_endpoint():
+    from weather import fetch_weather  # Wetterfunktion importieren
     weather, status = fetch_weather()
     if status != 200:
         return jsonify({'error': 'Failed to fetch weather data'}), status
@@ -135,6 +77,7 @@ def options_endpoint():
 # Route: Empfehlungen abrufen
 @app.route('/recommendations', methods=['POST'])
 def recommendations_endpoint():
+    from weather import fetch_weather  # Wetterfunktion importieren
     data = request.json
     energy_level = data.get('energy_level')  # Erwartet: very-energetic, good, neutral, low, very-low
     interest = data.get('interest')  # Erwartet: outdoor, fitness, yoga, home, meditation
@@ -157,6 +100,9 @@ def recommendations_endpoint():
         'interest': interest,
         'recommendations': recommendations
     })
+
+# Blueprint registrieren
+app.register_blueprint(weather_bp)
 
 # Start der Flask-Anwendung
 if __name__ == '__main__':
