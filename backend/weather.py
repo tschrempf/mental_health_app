@@ -52,7 +52,14 @@ def fetch_weather():
         96: 'regen',
         99: 'regen'
     }
-    weather = weather_map.get(weather_code, 'sonnig')  # Standard: sonnig
+    
+    # Wetterwert formatieren
+    def format_weather(weather):
+        if weather == 'windig':
+            return 'windig'  # Ausnahme für 'windig'
+        return weather.capitalize()  # Erster Buchstabe groß, Rest klein
+
+    weather = format_weather(weather_map.get(weather_code, 'sonnig'))  # Standard: sonnig
     return weather, 200
 
 # Route: Wetterdaten abrufen
