@@ -24,7 +24,6 @@ def check_tables():
         print(table[0])  # Namen der Tabellen ausgeben
     conn.close()
 
-
 # Debugging: Tabelle prüfen
 check_tables()
 
@@ -56,37 +55,19 @@ def close_db_connection(exception):
     if db is not None:
         db.close()
 
-# Neu hinzugefügt: Funktion zur dynamischen Tabellenzuordnung
-def get_table_name(weather):
-    # Tabellen-Mapping basierend auf den Wetterbedingungen
-    weather_to_table = {
-        "Bewölkt": "cloudy_recommendation",
-        "Regen": "rain_recommendation",
-        "Schnee": "snow_recommnedation",  # Beibehaltung der Schreibweise aus der Datenbank
-        "Sonnig": "sunny_recommendation",
-        "Windig": "windy_recommendation"
-    }
-    return weather_to_table.get(weather, None)
-
 # Funktion: Empfehlungen aus der Datenbank abrufen
 def get_recommendations(weather, energy_level, interest):
-    # Tabellenname basierend auf dem Wetter ermitteln
-    table_name = get_table_name(weather)
-    if not table_name:
-        print(f"No table found for weather: {weather}")  # Debugging
-        return []
-
     conn = get_db_connection()
-    query = f"""
+    query = """
         SELECT activity, description, media1, media2, media3
-        FROM {table_name}
-        WHERE energy_level = ? AND interest = ?
+        FROM recommendations
+        WHERE weather = ? AND energy_level = ? AND interest = ?
     """
-    print(f"Executing query: {query}")  # Debugging
-    print(f"Parameters: energy_level={energy_level}, interest={interest}")  # Debugging
+    print(f"Executing query: {query}")  # Debugging-Ausgabe
+    print(f"Parameters: weather={weather}, energy_level={energy_level}, interest={interest}")  # Debugging-Ausgabe
     
     # SQL-Abfrage ausführen
-    cursor = conn.execute(query, (energy_level, interest))
+    cursor = conn.execute(query, (weather, energy_level, interest))
     rows = cursor.fetchall()
 
     print(f"Rows fetched: {rows}")  # Debugging-Ausgabe, zeigt die zurückgegebenen Zeilen
@@ -105,6 +86,11 @@ def get_recommendations(weather, energy_level, interest):
         for row in rows
     ]
     return recommendations
+
+# Route: Hauptseite
+@app.route('/')
+def home():
+    return " Das ist ein Test"
 
 # Route: Empfehlungen abrufen
 @app.route('/recommendations', methods=['GET'])
