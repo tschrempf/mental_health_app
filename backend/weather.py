@@ -25,38 +25,38 @@ def fetch_weather():
     
     # Wettercode auf Wetterbedingungen mappen
     weather_map = {
-        0: 'sonnig',
-        1: 'bewölkt',
-        2: 'bewölkt',
-        3: 'bewölkt',
-        45: 'bewölkt',
-        48: 'bewölkt',
-        51: 'regen',
-        53: 'regen',
-        55: 'regen',
-        61: 'regen',
-        63: 'regen',
-        65: 'regen',
-        66: 'regen',
-        67: 'regen',
-        71: 'schnee',
-        73: 'schnee',
-        75: 'schnee',
-        77: 'schnee',
-        80: 'regen',
-        81: 'regen',
-        82: 'regen',
-        85: 'schnee',
-        86: 'schnee',
-        95: 'regen',
-        96: 'regen',
-        99: 'regen'
+        0: 'sunny',
+        1: 'cloudy',
+        2: 'cloudy',
+        3: 'cloudy',
+        45: 'cloudy',
+        48: 'cloudy',
+        51: 'rain',
+        53: 'rain',
+        55: 'rain',
+        61: 'rain',
+        63: 'rain',
+        65: 'rain',
+        66: 'rain',
+        67: 'rain',
+        71: 'snow',
+        73: 'snow',
+        75: 'snow',
+        77: 'snow',
+        80: 'rain',
+        81: 'rain',
+        82: 'rain',
+        85: 'snow',
+        86: 'snow',
+        95: 'rain',
+        96: 'rain',
+        99: 'rain'
     }
     
     # Wetterwert formatieren
     def format_weather(weather):
-        if weather == 'windig':
-            return 'windig'  # Ausnahme für 'windig'
+        if weather == 'windy':
+            return 'windy'  # Ausnahme für 'windig'
         return weather.capitalize()  # Erster Buchstabe groß, Rest klein
 
     weather = format_weather(weather_map.get(weather_code, 'sonnig'))  # Standard: sonnig
