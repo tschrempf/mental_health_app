@@ -10,7 +10,7 @@ app.register_blueprint(weather_bp)
 
 # Absoluter Pfad zur Datenbank relativ zu diesem Skript
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))  # Pfad zum aktuellen Skript
-DATABASE = os.path.join(BASE_DIR, 'Recommendation_Database.db')
+DATABASE = os.path.join(BASE_DIR, 'database','Recommendation_Database.db')
 
 # Debugging: Datenbankpfad ausgeben
 print(f"Verwendete Datenbank: {DATABASE}")
@@ -63,7 +63,7 @@ def get_recommendations(weather, energy_level, interest):
 
     # SQL-Abfrage
     query = f"""
-        SELECT activity, description, media AS media1, "media,,," AS media2
+        SELECT activity, description, media AS media1, media2 AS media2
         FROM {table_name}
         WHERE "energy level" = ? AND interest = ?
     """
