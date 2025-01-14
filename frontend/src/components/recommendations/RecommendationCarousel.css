@@ -14,14 +14,20 @@
   color: #2c387e;
 }
 
+.carousel-arrow:hover {
+  cursor: pointer;
+  background-color: #f5f5f5;
+  border-radius: 8px;
+}
+
 .arrow-left {
-  left: 0;
+  left: -2.5rem;
   top: 50%;
   transform: translateY(-50%);
 }
 
 .arrow-right {
-  right: 0;
+  right: -2.5rem;
   top: 50%;
   transform: translateY(-50%);
 }
@@ -39,16 +45,18 @@
   background-color: whitesmoke;
   height: 1rem;
   width: 1rem;
-  border-radius: 100%;
+  border-radius: 50%;
   border: none;
   outline: none;
   box-shadow: 0px 2px 2px lightgrey;
   margin: 0 0.2rem;
   cursor: pointer;
+  font-size: 0px;
 }
 
 .indicator-inactive {
   background-color: grey;
+  border-radius: 50%;
 }
 
 .hidden-slide {

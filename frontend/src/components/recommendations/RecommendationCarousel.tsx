@@ -3,7 +3,6 @@ import { CardType } from "../../types/Card";
 import ArrowBackIosNewRoundedIcon from "@mui/icons-material/ArrowBackIosNewRounded";
 import ArrowForwardIosRoundedIcon from "@mui/icons-material/ArrowForwardIosRounded";
 import { useState } from "react";
-
 import "./RecommendationCarousel.css";
 
 interface CardCarouselProps {

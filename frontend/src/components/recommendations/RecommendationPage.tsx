@@ -19,9 +19,8 @@ const RecommendationPage = () => {
    * The weather is fetched from the backend and then set as the weather state.
    *
    * @returns {Promise<void>}
-   * @async
    */
-  const fetchWeather = async () => {
+  const fetchWeather = async (): Promise<void> => {
     try {
       const response = await axios.get("http://127.0.0.1:8000/weather");
       setWeather(response.data);
@@ -36,9 +35,8 @@ const RecommendationPage = () => {
    * The cards are then set as the recommendation content.
    *
    * @returns {Promise<void>}
-   * @async
    */
-  const fetchRecommendations = async () => {
+  const fetchRecommendations = async (): Promise<void> => {
     try {
       const response = await axios.get(
         `http://127.0.0.1:8000/recommendations?energy_level=${selections.energy}&interest=${selections.activity}`
