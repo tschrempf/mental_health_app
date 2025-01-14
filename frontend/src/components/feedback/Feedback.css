@@ -1,0 +1,109 @@
+body {
+    background-color: #add8e6;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .feedback-container {
+    margin: 1.5rem auto;
+    max-width: 55%;
+    padding: 2rem;
+    text-align: center;
+    color: #333;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 8px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .feedback-title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 1.5rem;
+    color: #6b9ac4;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+  }
+  
+  .feedback-description {
+    font-size: 1rem;
+    color: #666;
+    line-height: 1.5;
+    margin-bottom: 2rem;
+  }
+  
+  .feedback-stars {
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+    cursor: pointer;
+  }
+  
+  .feedback-stars .star {
+    color: #ccc;
+    transition: color 0.3s;
+  }
+  
+  .feedback-stars .star.selected {
+    color: #6b9ac4;
+  }
+  
+  .feedback-form {
+    width: 100%;
+    max-width: 500px;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  
+  .feedback-input,
+  .feedback-textarea {
+    width: 100%;
+    padding: 1rem;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .feedback-button {
+    background-color: #6b9ac4;
+    color: white;
+    padding: 1rem 2rem;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .feedback-button:hover {
+    background-color: #2c387e;
+  }
+  
+  .feedback-message {
+    font-size: 1rem;
+    color: #4caf50;
+    margin-top: 1rem;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 480px) {
+    .feedback-container {
+      max-width: 90%;
+      padding: 1rem;
+    }
+  
+    .feedback-title {
+      font-size: 2rem;
+    }
+  
+    .feedback-stars {
+      font-size: 2rem;
+    }
+  }
+  

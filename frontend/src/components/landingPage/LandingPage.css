@@ -1,0 +1,96 @@
+.landing-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: Arial, sans-serif;
+  background-color: #add8e6;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  background-color: rgba(255, 255, 255, 0.8);
+  min-height: calc(100vh - 154px - 2rem);
+  padding: 0 8rem 0 8rem;
+  border-radius: 1%;
+  justify-content: flex-start;
+  margin-bottom: 1.25rem;
+  margin-top: 1.25rem;
+}
+
+.title {
+  color: #6b9ac4;
+  font-weight: bold;
+  text-shadow: 0.1vw 0.1vw 0.3vw rgba(0, 0, 0, 0.2);
+  font-size: 2.6vw;
+  margin-bottom: 2%;
+  margin-top: 8%;
+  text-align: center;
+}
+
+.name-input {
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 1%;
+  max-width: 50%;
+}
+
+.slogan1 {
+  color: #6b9ac4;
+  text-align: center;
+  font-style: italic;
+  display: block;
+  font-size: 2rem;
+  margin-top: 4vh;
+  font-size: 0.9rem !important;
+}
+
+/* Basis-Styling für größere Bildschirme */
+.landing-page {
+  padding: 1rem;
+}
+
+/* Ab Tablet-Breite (768px) */
+@media (max-width: 768px) {
+  .content {
+    max-width: 90%;
+    padding: 4%;
+  }
+
+  .title {
+    font-size: 4vw;
+    margin-top: 5%;
+    margin-bottom: 5%;
+  }
+
+  .name-input {
+    max-width: 80%;
+  }
+
+  .slogan1 {
+    font-size: 0.8rem;
+  }
+}
+
+/* Für kleinere Mobilgeräte (480px und kleiner) */
+@media (max-width: 480px) {
+  .content {
+    max-width: 90%;
+    padding: 4%;
+  }
+
+  .title {
+    font-size: 5vw;
+    margin-top: 4%;
+    margin-bottom: 4%;
+  }
+
+  .name-input {
+    max-width: 100%;
+  }
+
+  .slogan1 {
+    font-size: 0.7rem;
+  }
+}

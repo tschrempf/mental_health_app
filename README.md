@@ -29,6 +29,14 @@ This project is made as part of the _Agile Software Engineering_ module at the F
 - `pip3 install Flask` - install Flask (differs on Windows)
 - `python3 run.py` - run the backend project
 
+### Frontend
+
+- make sure you have Node.js on your computer
+- `cd frontend`
+- `npm install` - install dependencies
+- `npm run dev` - run the frontend project
+
+
 ## Dependencies and used libraries
 
 TBD
