@@ -1,4 +1,4 @@
-import CardCarousel from "./RecommendationCarousle";
+import CardCarousel from "./RecommendationCarousel";
 import { Typography } from "@mui/material";
 import { CardType } from "../../types/Card";
 import "./RecommendationPage.css";

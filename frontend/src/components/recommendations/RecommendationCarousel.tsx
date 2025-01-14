@@ -1,5 +1,5 @@
 import RecommendationCard from "./RecommendationCard";
-import { CardType } from "../../types/Card.d";
+import { CardType } from "../../types/Card";
 import ArrowBackIosNewRoundedIcon from "@mui/icons-material/ArrowBackIosNewRounded";
 import ArrowForwardIosRoundedIcon from "@mui/icons-material/ArrowForwardIosRounded";
 import { useState } from "react";
