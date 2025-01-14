@@ -1,11 +1,14 @@
 from flask import Flask, request, jsonify, g
 import sqlite3
-from weather import weather_bp  # Import des Wetter-Blueprints
+from weather import weather_bp, fetch_weather  # Wetter-Blueprint und Funktion importieren
+import os
+
 
 app = Flask(__name__)
 
-# Absoluter Pfad zur SQLite-Datenbank (anpassen, falls nötig)
-DATABASE = '/path/to/your/Recommendation_Database.db'
+# Absoluter Pfad zur SQLite-Datenbank
+BASE_DIR = os.path.abspath(os.path.dirname(__file__))
+DATABASE = os.path.join(BASE_DIR, 'Database', 'Recommendation_Database.db')
 
 # Verbindung zur SQLite-Datenbank herstellen
 def get_db_connection():
@@ -49,10 +52,10 @@ def get_recommendations(weather, energy_level, interest):
     conn.close()
     
     recommendations = [{
-        'activity': row['activity'],
-        'description': row['description'],
-        'media': [media for media in [row['media1'], row['media2'], row['media3']] if media]
-    } for row in rows]
+        'activity': column['activity'],
+        'description': column['description'],
+        'media': [media for media in [column['media1'], column['media2'], column['media3']] if media]
+    } for column in rows]
     return recommendations
 
 # Standardroute zur Überprüfung, ob die API läuft
@@ -75,9 +78,9 @@ def options_endpoint():
     return jsonify({'weather': weather, 'options': options})
 
 # Route: Empfehlungen abrufen
-@app.route('/recommendations', methods=['POST'])
+@app.route('/recommendations', methods=['GET'])
 def recommendations_endpoint():
-    from weather import fetch_weather  # Wetterfunktion importieren
+    from weather import fetch_weather # Wetterfunktion importieren
     data = request.json
     energy_level = data.get('energy_level')  # Erwartet: very-energetic, good, neutral, low, very-low
     interest = data.get('interest')  # Erwartet: outdoor, fitness, yoga, home, meditation
@@ -100,6 +103,18 @@ def recommendations_endpoint():
         'interest': interest,
         'recommendations': recommendations
     })
+
+@app.route('/test_db', methods=['GET'])
+def test_db():
+    try:
+        conn = get_db_connection()
+        query = "SELECT name FROM sqlite_master WHERE type='table';"
+        tables = conn.execute(query).fetchall()
+        conn.close()
+        return jsonify({'tables': [table[0] for table in tables]}), 200
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
 
 # Blueprint registrieren
 app.register_blueprint(weather_bp)
