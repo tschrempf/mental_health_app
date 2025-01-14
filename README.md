@@ -17,6 +17,7 @@ This project is made as part of the _Agile Software Engineering_ module at the F
 
 - _frontend_ folder: contains the frontend
 - _backend_ folder: contains the backend
+- _resources_ folder: contains resources used during planning and development, but not relevant to the application
 
 ## How to start the project
 
@@ -27,6 +28,8 @@ This project is made as part of the _Agile Software Engineering_ module at the F
 - `python3 -m venv .venv` - create virtual environment
 - `source .venv/bin/activate` - activate it (differs on Windows)
 - `pip3 install Flask` - install Flask (differs on Windows)
+- `pip3 install flask-cors` - install Flask-CORS library (differs on Windows)
+- `pip3 install requests` - install requests library (differs on windows)
 - `python3 run.py` - run the backend project
 
 ### Frontend
