@@ -14,6 +14,13 @@ const RecommendationPage = () => {
   const [recommendationContent, setRecommendationContent] = useState<CardType[]>([]);
   const { selections } = useSelection();
 
+  /**
+   * Fetches the current weather from the backend and sets it as the weather state.
+   * The weather is fetched from the backend and then set as the weather state.
+   *
+   * @returns {Promise<void>}
+   * @async
+   */
   const fetchWeather = async () => {
     try {
       const response = await axios.get("http://127.0.0.1:8000/weather");
@@ -23,22 +30,35 @@ const RecommendationPage = () => {
     }
   };
 
+  /**
+   * Fetches recommendations based on the user's current selections.
+   * The recommendations are fetched from the backend and then mapped to cards.
+   * The cards are then set as the recommendation content.
+   *
+   * @returns {Promise<void>}
+   * @async
+   */
   const fetchRecommendations = async () => {
     try {
       const response = await axios.get(
         `http://127.0.0.1:8000/recommendations?energy_level=${selections.energy}&interest=${selections.activity}`
       );
       setRecommendationContent(mapRecommendationToCard(response.data.recommendations));
-      console.log(response.data.recommendations);
     } catch (error) {
       console.error(error);
     }
   };
 
+  /**
+   * Calls the fetchWeather function when the component mounts.
+   */
   useEffect(() => {
     fetchWeather();
   }, []);
 
+  /**
+   * Calls the fetchRecommendations function when the component mounts.
+   */
   useEffect(() => {
     fetchRecommendations();
   }, []);
