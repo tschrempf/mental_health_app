@@ -20,7 +20,21 @@ This project is made as part of the _Agile Software Engineering_ module at the F
 
 ## How to start the project
 
-TBD
+### Backend
+
+- make sure you have python/python3 on your computer
+- `cd backend`
+- `python3 -m venv .venv` - create virtual environment
+- `source .venv/bin/activate` - activate it (differs on Windows)
+- `pip3 install Flask` - install Flask (differs on Windows)
+- `python3 run.py` - run the backend project
+
+### Frontend
+
+- make sure you have Node.js on your computer
+- `cd frontend`
+- `npm install` - install dependencies
+- `npm run dev` - run the frontend project
 
 ## Dependencies and used libraries
 
