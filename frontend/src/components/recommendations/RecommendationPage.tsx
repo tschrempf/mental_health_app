@@ -2,43 +2,49 @@ import CardCarousel from "./RecommendationCarousel";
 import { Typography } from "@mui/material";
 import { CardType } from "../../types/Card";
 import "./RecommendationPage.css";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { getBackgroundImage } from "../../util/WeatherHelper";
+import { WeatherData } from "../../types/Weather";
+import { useSelection } from "../../context/SelectionContext";
+import { mapRecommendationToCard } from "../../util/RecommendationHelper";
 
 const RecommendationPage = () => {
-  const recommendationContent: CardType[] = [
-    {
-      title: "Spaziergang im Park",
-      text: "Ein Spaziergang im Park kann wahre Wunder bewirken. Die frische Luft und die Natur können dir helfen, dich zu entspannen und neue Energie zu tanken.",
-      imageUrl: "https://images.unsplash.com/photo-1606785883223-6f4b2f3d3d4b",
-    },
-    {
-      title: "Yoga",
-      text: "Yoga ist eine großartige Möglichkeit",
-      videoUrl: "https://www.youtube.com/embed/v7SN-d4qXx0?si=pDzmpr5Vei4bCVs5",
-    },
-    {
-      title: "Spaziergang im Park",
-      text: "Ein Spaziergang im Park kann wahre Wunder bewirken. Die frische Luft und die Natur können dir helfen, dich zu entspannen und neue Energie zu tanken.",
-      imageUrl: "https://images.unsplash.com/photo-1606785883223-6f4b2f3d3d4b",
-    },
-    {
-      title: "Yoga",
-      text: "Yoga ist eine großartige Möglichkeit",
-      videoUrl: "https://www.youtube.com/embed/v7SN-d4qXx0?si=pDzmpr5Vei4bCVs5",
-    },
-    {
-      title: "Spaziergang im Park",
-      text: "Ein Spaziergang im Park kann wahre Wunder bewirken. Die frische Luft und die Natur können dir helfen, dich zu entspannen und neue Energie zu tanken.",
-      imageUrl: "https://images.unsplash.com/photo-1606785883223-6f4b2f3d3d4b",
-    },
-    {
-      title: "Yoga",
-      text: "Yoga ist eine großartige Möglichkeit",
-      videoUrl: "https://www.youtube.com/embed/v7SN-d4qXx0?si=pDzmpr5Vei4bCVs5",
-    },
-  ];
+  const [weather, setWeather] = useState<WeatherData | null>(null);
+  const [recommendationContent, setRecommendationContent] = useState<CardType[]>([]);
+  const { selections } = useSelection();
+
+  const fetchWeather = async () => {
+    try {
+      const response = await axios.get("http://127.0.0.1:8000/weather");
+      setWeather(response.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const fetchRecommendations = async () => {
+    try {
+      const response = await axios.get(
+        `http://127.0.0.1:8000/recommendations?energy_level=${selections.energy}&interest=${selections.activity}`
+      );
+      setRecommendationContent(mapRecommendationToCard(response.data.recommendations));
+      console.log(response.data.recommendations);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  useEffect(() => {
+    fetchWeather();
+  }, []);
+
+  useEffect(() => {
+    fetchRecommendations();
+  }, []);
 
   return (
-    <div className="recommendationPage">
+    <div style={{ backgroundImage: `url(${getBackgroundImage(weather)})` }} className="recommendationPage">
       <div className="recommendationContent">
         <Typography
           variant="h4"

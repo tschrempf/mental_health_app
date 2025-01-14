@@ -1,11 +1,14 @@
 from flask import Flask, request, jsonify, g, Response
+from flask_cors import CORS
 import sqlite3
 from weather import weather_bp, fetch_weather  # Import des Wetter-Blueprints und der Funktion
 import os
 from collections import OrderedDict
 import json
 
+
 app = Flask(__name__)
+cors = CORS(app, origins="*")
 app.register_blueprint(weather_bp)
 
 # Absoluter Pfad zur Datenbank relativ zu diesem Skript

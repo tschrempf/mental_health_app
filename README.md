@@ -36,7 +36,6 @@ This project is made as part of the _Agile Software Engineering_ module at the F
 - `npm install` - install dependencies
 - `npm run dev` - run the frontend project
 
-
 ## Dependencies and used libraries
 
 TBD
