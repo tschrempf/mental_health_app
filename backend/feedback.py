@@ -64,17 +64,9 @@ def save_feedback():
     if not re.match(email_regex, email_address):
         return jsonify({"error": "Ungültige E-Mail-Adresse"}), 400
     
-    # Validate star_rating (must be an integer between 1 and 5)
-    try:
-        star_rating = int(star_rating)  # Convert to integer
-        if not (1 <= star_rating <= 5):
-            raise ValueError
-    except (TypeError, ValueError):
-        return jsonify({"error": "Bewertung muss eine Zahl zwischen 1 und 5 sein"}), 400
-
     # Save feedback to the database
     try:
-        with sqlite3.connect(DB_PATH) as conn:  # Verwende absoluten Pfad
+        with sqlite3.connect(DB_PATH) as conn:  # Use absolute path to connect to the database
             cursor = conn.cursor()
             cursor.execute("""
                 INSERT INTO feedback (email_address, feedback_text, star_rating)
