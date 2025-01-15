@@ -2,15 +2,19 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS
 import sqlite3
 import re
+import os
 
 app = Flask(__name__)
 CORS(app)  # Aktiviert CORS für alle Routen
-# Alternativ: 
-# CORS(app, resources={r"/feedback": {"origins": "http://localhost:5173"}})
+
+# Absoluter Pfad zur Datenbank
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))  # Verzeichnis dieses Skripts
+DB_PATH = os.path.join(BASE_DIR, 'feedback.db')  # Absoluter Pfad zur feedback.db
 
 # Function to initialize the database and create the table
 def init_db():
-    conn = sqlite3.connect('feedback.db')  # Connect to the SQLite database & create file to store data
+    print(f"Verwendete Datenbank: {DB_PATH}")
+    conn = sqlite3.connect(DB_PATH)  # Connect to the SQLite database
     cursor = conn.cursor()
 
     # Create the feedback table if it doesn't exist
@@ -70,13 +74,14 @@ def save_feedback():
 
     # Save feedback to the database
     try:
-        with sqlite3.connect('feedback.db') as conn:
+        with sqlite3.connect(DB_PATH) as conn:  # Verwende absoluten Pfad
             cursor = conn.cursor()
             cursor.execute("""
                 INSERT INTO feedback (email_address, feedback_text, star_rating)
                 VALUES (?,?,?)
             """, (email_address, feedback_text, star_rating))
     except sqlite3.Error as e:
+        print(f"SQLite-Fehler: {e}")
         return jsonify({"error": "Fehler beim Speichern des Feedbacks"}), 500
 
     return jsonify({"message": "Vielen Dank! Feedback erfolgreich übermittelt"}), 201
