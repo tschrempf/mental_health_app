@@ -43,21 +43,15 @@ const Footer = () => {
           marginBottom: { xs: "0.625rem", md: "0" },
         }}
       >
+        <Typography variant="body1" sx={{ color: "#2c387e", fontSize: "1rem" }}>
+          •
+        </Typography>
         <Link component={RouterLink} to="/" color="#666" underline="hover" sx={{ fontFamily: "Arial, sans-serif" }}>
           Startseite
         </Link>
         <Typography variant="body1" sx={{ color: "#2c387e", fontSize: "1rem" }}>
           •
         </Typography>
-        <Link color="#666" underline="hover" sx={{ fontFamily: "Arial, sans-serif" }}>
-          Über uns
-        </Link>
-        <Typography variant="body1" sx={{ color: "#2c387e", fontSize: "1rem" }}>
-          •
-        </Typography>
-        <Link color="#666" underline="hover" sx={{ fontFamily: "Arial, sans-serif" }}>
-          Impressum
-        </Link>
       </Box>
 
       {/* Social Media Icons */}
