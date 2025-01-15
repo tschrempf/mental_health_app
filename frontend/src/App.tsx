@@ -4,7 +4,7 @@ import LandingPage from "./components/landingPage/LandingPage";
 import QuestionPage1 from "./components/question1/QuestionPage1";
 import QuestionPage2 from "./components/question2/QuestionPage2";
 import RecommendationPage from "./components/recommendations/RecommendationPage";
-import { Feedback } from "@mui/icons-material";
+import Feedback from "./components/feedback/Feedback";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import { SelectionProvider } from "./context/SelectionContext"; // Import SelectionProvider
@@ -29,7 +29,7 @@ function App() {
 
             {/* Feedback Page */}
             <Route path="/feedback" element={<Feedback />} />
-          </Routes>
+            </Routes>
           {/* Footer */}
           <Footer />
         </main>
