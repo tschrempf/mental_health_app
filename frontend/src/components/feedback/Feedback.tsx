@@ -1,99 +1,86 @@
-import React, { useState, useEffect } from "react";
-import './Feedback.css';
+import React, { useState } from "react";
+import "./Feedback.css";
 
-const Feedback: React.FC = () => {
+const FeedbackPage: React.FC = () => {
   const [email, setEmail] = useState("");
-  const [feedback, setFeedback] = useState("");
-  const [selectedStars, setSelectedStars] = useState(0);
+  const [feedbackText, setFeedbackText] = useState("");
+  const [rating, setRating] = useState(0);
   const [message, setMessage] = useState("");
 
-  useEffect(() => {
-    window.scrollTo(0, 0); // Scrollt die Seite beim Laden nach oben
-  }, []);
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
 
-  const handleStarClick = (index: number) => {
-    setSelectedStars(index + 1); // Setzt die Sternebewertung
-  };
-
-  const handleSubmit = async () => {
-    if (!feedback || selectedStars === 0) {
-      setMessage("Bitte gib Feedback und eine Sternebewertung an.");
-      return;
-    }
+    const feedbackData = {
+      email_address: email,
+      feedback_text: feedbackText,
+      star_rating: rating,
+    };
 
     try {
-      const response = await fetch("http://localhost:5000/api/feedback", {
+      const response = await fetch("http://127.0.0.1:5000/feedback", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({
-          email,
-          feedback,
-          stars: selectedStars,
-        }),
+        body: JSON.stringify(feedbackData),
       });
 
       if (response.ok) {
-        setMessage("Vielen Dank für dein Feedback!");
+        setMessage("Feedback erfolgreich gesendet! Vielen Dank!");
+        // Felder zurücksetzen
         setEmail("");
-        setFeedback("");
-        setSelectedStars(0);
+        setFeedbackText("");
+        setRating(0);
       } else {
-        setMessage("Fehler beim Senden des Feedbacks. Bitte versuche es erneut.");
+        const errorData = await response.json();
+        setMessage(`Fehler: ${errorData.error || "Unbekannter Fehler"}`);
       }
     } catch (error) {
-      console.error("Error submitting feedback:", error);
+      console.error("Fehler beim Senden des Feedbacks:", error);
       setMessage("Es gab einen Fehler beim Senden deines Feedbacks.");
     }
   };
 
   return (
-    <div className="feedback-container">
-      <div>
+    <div className="feedback-page">
+      <div className="feedback-container">
         <h1 className="feedback-title">FEEDBACK</h1>
         <p className="feedback-description">
           Wir schätzen deine Meinung sehr! Teile uns mit, wie wir die BrightenUp-App noch verbessern können.
         </p>
+        <form className="feedback-form" onSubmit={handleSubmit}>
+          <div className="feedback-stars">
+            {[1, 2, 3, 4, 5].map((star) => (
+              <span
+                key={star}
+                className={`star ${rating >= star ? "selected" : ""}`}
+                onClick={() => setRating(star)}
+              >
+                ★
+              </span>
+            ))}
+          </div>
+          <input
+            type="email"
+            className="feedback-input"
+            placeholder="Deine E-Mail Adresse (optional)"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          <textarea
+            className="feedback-textarea"
+            placeholder="Schreibe hier deine Anregungen und Wünsche."
+            value={feedbackText}
+            onChange={(e) => setFeedbackText(e.target.value)}
+          />
+          <button type="submit" className="feedback-button">
+            Senden
+          </button>
+        </form>
+        {message && <p className="feedback-message">{message}</p>}
       </div>
-
-      <div className="feedback-stars">
-        {Array(5).fill(0).map((_, index) => (
-          <span
-            key={index}
-            className={`star ${index < selectedStars ? "selected" : ""}`}
-            onClick={() => handleStarClick(index)}
-            title={`${index + 1} Stern${index === 0 ? "" : "e"}`}
-          >
-            ★
-          </span>
-        ))}
-      </div>
-
-      <div className="feedback-form">
-        <input
-          type="email"
-          placeholder="Deine E-Mail Adresse (optional)"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          className="feedback-input"
-        />
-        <textarea
-          placeholder="Schreibe hier deine Anregungen und Wünsche."
-          value={feedback}
-          onChange={(e) => setFeedback(e.target.value)}
-          className="feedback-textarea"
-          rows={4}
-        ></textarea>
-      </div>
-
-      {message && <p className="feedback-message">{message}</p>}
-
-      <button className="feedback-button" onClick={handleSubmit}>
-        Senden
-      </button>
     </div>
   );
 };
 
-export default Feedback;
+export default FeedbackPage;

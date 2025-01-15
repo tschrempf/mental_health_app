@@ -1,8 +1,12 @@
 from flask import Flask, request, jsonify
+from flask_cors import CORS
 import sqlite3
 import re
 
 app = Flask(__name__)
+CORS(app)  # Aktiviert CORS für alle Routen
+# Alternativ: 
+# CORS(app, resources={r"/feedback": {"origins": "http://localhost:5173"}})
 
 # Function to initialize the database and create the table
 def init_db():
@@ -25,6 +29,10 @@ def init_db():
 
 # Call the init_db function when the app starts
 init_db()
+
+@app.route('/')
+def home():
+    return "Der Flask-Server läuft erfolgreich!"
 
 # Define a route to handle feedback submission
 @app.route('/feedback', methods=['POST'])
