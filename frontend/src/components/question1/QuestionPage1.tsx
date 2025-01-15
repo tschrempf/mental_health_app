@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Typography } from "@mui/material";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom"; // <-- useLocation hinzufügen
 import LocationCityIcon from "@mui/icons-material/LocationCity";
 import FitnessCenterIcon from "@mui/icons-material/FitnessCenter";
 import SelfImprovementIcon from "@mui/icons-material/SelfImprovement";
@@ -19,8 +19,12 @@ const options = [
 
 const QuestionPage1: React.FC = () => {
   const navigate = useNavigate();
+  const location = useLocation(); // <-- useLocation verwenden
   const { setSelection } = useSelection();
   const [value, setValue] = useState("");
+
+  // Den Namen aus dem Zustand abrufen
+  const name = location.state?.name || "du";
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -30,7 +34,7 @@ const QuestionPage1: React.FC = () => {
     console.log("Selected:", value);
     setValue(value);
     setSelection("activity", value);
-    navigate("/question2"); // Korrigierter Pfad
+    navigate("/question2", { state: { name } }); // Name an die nächste Seite weitergeben
   };
 
   return (
@@ -38,7 +42,7 @@ const QuestionPage1: React.FC = () => {
       <div className="transparent-box" />
       <div className="content">
         <Typography variant="h4" className="title">
-          Worauf hast du heute Lust?
+          Worauf hast du heute Lust, {name}?
         </Typography>
 
         <div className="icon-grid">
@@ -59,5 +63,3 @@ const QuestionPage1: React.FC = () => {
 };
 
 export default QuestionPage1;
-
-

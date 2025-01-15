@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Typography } from "@mui/material";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom"; // <-- useLocation hinzufügen
 import SentimentVerySatisfiedIcon from "@mui/icons-material/SentimentVerySatisfied";
 import SentimentSatisfiedIcon from "@mui/icons-material/SentimentSatisfied";
 import SentimentNeutralIcon from "@mui/icons-material/SentimentNeutral";
@@ -9,14 +9,14 @@ import SentimentVeryDissatisfiedIcon from "@mui/icons-material/SentimentVeryDiss
 import { useSelection } from "../../context/SelectionContext";
 import "./QuestionPage2.css";
 
-interface QuestionPage2Props {
-  name?: string;
-}
-
-const QuestionPage2: React.FC<QuestionPage2Props> = ({ name }) => {
+const QuestionPage2: React.FC = () => {
   const navigate = useNavigate();
+  const location = useLocation(); // <-- Hinzufügen
   const { setSelection } = useSelection();
   const [value, setValue] = useState("");
+
+  // Den Namen aus dem Zustand abrufen (falls vorhanden)
+  const name = location.state?.name || "du";
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -26,7 +26,7 @@ const QuestionPage2: React.FC<QuestionPage2Props> = ({ name }) => {
     console.log("Energy:", value);
     setValue(value);
     setSelection("energy", value);
-    navigate(`/recommendation`); // Korrigierter Pfad (war vorher `/recommendations`)
+    navigate(`/recommendation`, { state: { name } }); // Name weitergeben
   };
 
   const energyOptions = [
