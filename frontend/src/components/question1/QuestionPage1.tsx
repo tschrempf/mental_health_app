@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Typography } from "@mui/material";
-import { useNavigate, useLocation } from "react-router-dom"; // <-- useLocation hinzufügen
+import { useNavigate, useLocation } from "react-router-dom"; // <-- useLocation importieren
 import LocationCityIcon from "@mui/icons-material/LocationCity";
 import FitnessCenterIcon from "@mui/icons-material/FitnessCenter";
 import SelfImprovementIcon from "@mui/icons-material/SelfImprovement";
@@ -24,7 +24,7 @@ const QuestionPage1: React.FC = () => {
   const [value, setValue] = useState("");
 
   // Den Namen aus dem Zustand abrufen
-  const name = location.state?.name || "du";
+  const name = location.state?.name || "";
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -42,7 +42,7 @@ const QuestionPage1: React.FC = () => {
       <div className="transparent-box" />
       <div className="content">
         <Typography variant="h4" className="title">
-          Worauf hast du heute Lust, {name}?
+          Worauf hast du heute Lust{ name ? `, ${name}` : ""}?
         </Typography>
 
         <div className="icon-grid">

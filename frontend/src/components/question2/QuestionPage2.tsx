@@ -16,7 +16,7 @@ const QuestionPage2: React.FC = () => {
   const [value, setValue] = useState("");
 
   // Den Namen aus dem Zustand abrufen (falls vorhanden)
-  const name = location.state?.name || "du";
+  const name = location.state?.name || "";
 
   useEffect(() => {
     window.scrollTo(0, 0);
