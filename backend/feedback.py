@@ -9,7 +9,7 @@ app = Flask(__name__)
 # CORS activates und is restricted to a certain domain
 CORS(app, resources={r"/feedback": {"origins": "http://localhost:5173"}})
 
-# Absoluter Pfad zur Datenbank
+# Absolute path to the database
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))  #describes the directory of the current file
 DB_PATH = os.path.join(BASE_DIR, 'database','feedback.db') # path to the feedback database
 
@@ -19,7 +19,7 @@ def init_db():
     conn = sqlite3.connect(DB_PATH)  # Connect to the SQLite database
     cursor = conn.cursor()
 
-    # Create the feedback table if it doesn't exist
+    # Create the feedback table
     cursor.execute("""
         CREATE TABLE IF NOT EXISTS feedback (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
