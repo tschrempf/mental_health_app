@@ -5,7 +5,9 @@ import re
 import os
 
 app = Flask(__name__)
-CORS(app)  # Aktiviert CORS für alle Routen
+
+# CORS aktivieren und auf spezifische Domains beschränken
+CORS(app, resources={r"/feedback": {"origins": "http://localhost:5173"}})
 
 # Absoluter Pfad zur Datenbank
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))  # Verzeichnis dieses Skripts
@@ -63,7 +65,15 @@ def save_feedback():
     email_regex = r'^[^\s@]+@[^\s@]+\.[^\s@]+$'
     if not re.match(email_regex, email_address):
         return jsonify({"error": "Ungültige E-Mail-Adresse"}), 400
-    
+
+    # Validate star_rating to ensure it's an integer between 1 and 5
+    try:
+        star_rating = int(star_rating)
+        if not (1 <= star_rating <= 5):
+            return jsonify({"error": "Sternebewertung muss zwischen 1 und 5 liegen"}), 400
+    except ValueError:
+        return jsonify({"error": "Sternebewertung muss eine Zahl zwischen 1 und 5 sein"}), 400
+
     # Save feedback to the database
     try:
         with sqlite3.connect(DB_PATH) as conn:  # Use absolute path to connect to the database
@@ -74,7 +84,7 @@ def save_feedback():
             """, (email_address, feedback_text, star_rating))
     except sqlite3.Error as e:
         print(f"SQLite-Fehler: {e}")
-        return jsonify({"error": "Fehler beim Speichern des Feedbacks"}), 500
+        return jsonify({"error": f"Fehler beim Speichern des Feedbacks: {str(e)}"}), 500
 
     return jsonify({"message": "Vielen Dank! Feedback erfolgreich übermittelt"}), 201
 

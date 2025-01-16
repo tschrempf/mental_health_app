@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify, g, Response
+from flask import Flask, request, jsonify, g, Response, send_file
 from flask_cors import CORS
 import sqlite3
 from weather import weather_bp, fetch_weather  # Import des Wetter-Blueprints und der Funktion
@@ -91,7 +91,17 @@ def get_recommendations(weather, energy_level, interest):
 # Route: Hauptseite
 @app.route('/')
 def home():
-    return "Das ist ein Test"
+    return jsonify({
+        'Welcome': 'This is the Mental Health App API index page.',
+        'API': 'For a detailed api description check out the openapi route',
+        'Routes': ['/weather', '/recommendations', '/feedback', '/openapi'],
+    })
+
+# Route: OpenAPI-Specification
+@app.route('/openapi', methods=['GET'])
+def openapi():
+    return send_file('../resources/mental_health_app_api.yaml')
+
 
 # Route: Empfehlungen abrufen
 @app.route('/recommendations', methods=['GET'])

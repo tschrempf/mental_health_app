@@ -16,7 +16,10 @@ This project is made as part of the _Agile Software Engineering_ module at the F
 ## Project structure
 
 - _frontend_ folder: contains the frontend
+  - _public_: contains the public images used in the application
+  - _src_: contains the frontend code - the elements of the frontend are stored as components
 - _backend_ folder: contains the backend
+  - _database_: contains the database of the application
 - _resources_ folder: contains resources used during planning and development, but not relevant to the application
 
 ## How to start the project
@@ -42,3 +45,15 @@ This project is made as part of the _Agile Software Engineering_ module at the F
 ## Dependencies and used libraries
 
 TBD
+
+# How to use the app
+
+Using the BrightenUp app is simple and intuitive:
+
+- Start by entering your name (optional).
+- Select your current energy level and your interest/activity type (mandatory).
+- Based on your selections, the app will provide personalized activity recommendations.
+
+- If you have any feedback, you can send it to us using the button located in the upper right corner of the app.
+
+Please note that sessions are not stored, so you will need to re-enter your information each time you use the app.

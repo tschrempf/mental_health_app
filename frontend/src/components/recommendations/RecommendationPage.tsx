@@ -14,12 +14,6 @@ const RecommendationPage = () => {
   const [recommendationContent, setRecommendationContent] = useState<CardType[]>([]);
   const { selections } = useSelection();
 
-  /**
-   * Fetches the current weather from the backend and sets it as the weather state.
-   * The weather is fetched from the backend and then set as the weather state.
-   *
-   * @returns {Promise<void>}
-   */
   const fetchWeather = async (): Promise<void> => {
     try {
       const response = await axios.get("http://127.0.0.1:8000/weather");
@@ -29,13 +23,6 @@ const RecommendationPage = () => {
     }
   };
 
-  /**
-   * Fetches recommendations based on the user's current selections.
-   * The recommendations are fetched from the backend and then mapped to cards.
-   * The cards are then set as the recommendation content.
-   *
-   * @returns {Promise<void>}
-   */
   const fetchRecommendations = async (): Promise<void> => {
     try {
       const response = await axios.get(
@@ -47,16 +34,10 @@ const RecommendationPage = () => {
     }
   };
 
-  /**
-   * Calls the fetchWeather function when the component mounts.
-   */
   useEffect(() => {
     fetchWeather();
   }, []);
 
-  /**
-   * Calls the fetchRecommendations function when the component mounts.
-   */
   useEffect(() => {
     fetchRecommendations();
   }, []);
@@ -72,6 +53,7 @@ const RecommendationPage = () => {
             fontWeight: "bold",
             marginBottom: "20px",
             textShadow: "2px 2px 4px rgba(0, 0, 0, 0.5)",
+            fontSize: "2.5rem", // Schriftgröße vergrößert
           }}
         >
           Unsere Vorschläge für dich
@@ -85,14 +67,17 @@ const RecommendationPage = () => {
             maxWidth: "600px",
             margin: "0 auto",
             textShadow: "1px 1px 1px rgba(0, 0, 0, 0.5)",
+            fontSize: "1.2rem", // Schriftgröße für den Text vergrößert
+            lineHeight: "1.8", // Optional: Zeilenabstand angepasst
           }}
         >
-          Unsere Empfehlungen basieren auf dem aktuellen Wetter und sollen dir helfen, Aktivitäten zu finden, die dir
-          guttun – sowohl für deinen Körper als auch für deine Seele. Natürlich gibt es noch viele andere Dinge, die dir
-          helfen können, dich wohlzufühlen. Sieh unsere Vorschläge als kleine Inspiration. Deine mentale Gesundheit ist
-          wichtig, und das Wetter kann deine Stimmung stark beeinflussen. Egal ob Sonnenschein, Regen oder Schnee – mit
-          den richtigen Aktivitäten kannst du das Beste aus jedem Tag herausholen und dich dabei besser fühlen.
+          Unsere Empfehlungen basieren auf dem aktuellen Wetter und sollen dir helfen, Aktivitäten zu finden, die dir guttun – 
+          sowohl für deinen Körper als auch für deine Seele. Natürlich gibt es noch viele andere Dinge, die dir helfen können, 
+          dich wohlzufühlen. Sieh unsere Vorschläge als kleine Inspiration. Deine mentale Gesundheit ist wichtig, und das Wetter 
+          kann deine Stimmung stark beeinflussen. Egal ob Sonnenschein, Regen oder Schnee – mit den richtigen Aktivitäten kannst 
+          du das Beste aus jedem Tag herausholen und dich dabei besser fühlen.
         </Typography>
+
         <div className="carousel-bottom">
           <CardCarousel cards={recommendationContent} />
         </div>
@@ -102,4 +87,3 @@ const RecommendationPage = () => {
 };
 
 export default RecommendationPage;
-
