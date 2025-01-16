@@ -6,12 +6,12 @@ import os
 
 app = Flask(__name__)
 
-# CORS aktivieren und auf spezifische Domains beschränken
+# CORS activates und is restricted to a certain domain
 CORS(app, resources={r"/feedback": {"origins": "http://localhost:5173"}})
 
 # Absoluter Pfad zur Datenbank
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))  # Verzeichnis dieses Skripts
-DB_PATH = os.path.join(BASE_DIR, 'feedback.db')  # Absoluter Pfad zur feedback.db
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))  #describes the directory of the current file
+DB_PATH = os.path.join(BASE_DIR, 'feedback.db')  # Absolute Path to the database
 
 # Function to initialize the database and create the table
 def init_db():
@@ -48,24 +48,22 @@ def save_feedback():
     feedback_text = data.get('feedback_text')
     star_rating = data.get('star_rating')
 
+     #Collect all validation errors
+    errors = []
+
     # Collect missing fields
     missing_fields = []
     if not email_address:
         missing_fields.append("E-Mail-Adresse")
     if not feedback_text:
         missing_fields.append("Feedback-Text")
-    if star_rating is None:
+    if star_rating is None or star_rating == "" or star_rating == 0:
         missing_fields.append("Sternebewertung")
 
     # If any fields are missing, return an error
     if missing_fields:
         return jsonify({"error": f"Fehlende Felder: {', '.join(missing_fields)}"}), 400
-
-    # Validate email format (no spaces allowed)
-    email_regex = r'^[^\s@]+@[^\s@]+\.[^\s@]+$'
-    if not re.match(email_regex, email_address):
-        return jsonify({"error": "Ungültige E-Mail-Adresse"}), 400
-
+    
     # Validate star_rating to ensure it's an integer between 1 and 5
     try:
         star_rating = int(star_rating)
@@ -73,6 +71,11 @@ def save_feedback():
             return jsonify({"error": "Sternebewertung muss zwischen 1 und 5 liegen"}), 400
     except ValueError:
         return jsonify({"error": "Sternebewertung muss eine Zahl zwischen 1 und 5 sein"}), 400
+
+    # Validate email format (no spaces allowed)
+    email_regex = r'^[^\s@]+@[^\s@]+\.[^\s@]+$'
+    if not re.match(email_regex, email_address):
+        return jsonify({"error": "Ungültige E-Mail-Adresse"}), 400
 
     # Save feedback to the database
     try:
