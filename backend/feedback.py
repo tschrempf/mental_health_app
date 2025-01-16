@@ -11,7 +11,7 @@ CORS(app, resources={r"/feedback": {"origins": "http://localhost:5173"}})
 
 # Absoluter Pfad zur Datenbank
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))  #describes the directory of the current file
-DB_PATH = os.path.join(BASE_DIR, 'feedback.db')  # Absolute Path to the database
+DB_PATH = os.path.join(BASE_DIR, 'database','feedback.db') # path to the feedback database
 
 # Function to initialize the database and create the table
 def init_db():
@@ -23,7 +23,7 @@ def init_db():
     cursor.execute("""
         CREATE TABLE IF NOT EXISTS feedback (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
-            email_address TEXT NOT NULL,
+            email_address TEXT NOT NULL,d
             feedback_text TEXT NOT NULL,
             star_rating INTEGER NOT NULL,
             created_at DATETIME DEFAULT CURRENT_TIMESTAMP
