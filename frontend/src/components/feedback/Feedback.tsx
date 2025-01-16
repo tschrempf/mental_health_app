@@ -63,7 +63,7 @@ const FeedbackPage: React.FC = () => {
           <input
             type="email"
             className="feedback-input"
-            placeholder="Deine E-Mail Adresse (optional)"
+            placeholder="Deine E-Mail Adresse"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
