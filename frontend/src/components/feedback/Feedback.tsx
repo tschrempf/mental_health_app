@@ -33,7 +33,7 @@ const FeedbackPage: React.FC = () => {
         setRating(0);
       } else {
         const errorData = await response.json();
-        setMessage(` : ${errorData.error || "Unbekannter Fehler"}`);
+        setMessage(`  ${errorData.error || "Unbekannter Fehler"}`);
       }
     } catch (error) {
       console.error("Fehler beim Senden des Feedbacks:", error);
