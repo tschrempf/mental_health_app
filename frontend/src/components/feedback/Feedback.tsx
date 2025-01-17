@@ -17,7 +17,7 @@ const FeedbackPage: React.FC = () => {
     };
 
     try {
-      const response = await fetch("http://127.0.0.1:5000/feedback", {
+      const response = await fetch("/api/feedback", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -27,7 +27,7 @@ const FeedbackPage: React.FC = () => {
 
       if (response.ok) {
         setMessage("Feedback erfolgreich gesendet! Vielen Dank!");
-        // Felder zurücksetzen
+        // Clear input fields
         setEmail("");
         setFeedbackText("");
         setRating(0);
@@ -51,11 +51,7 @@ const FeedbackPage: React.FC = () => {
         <form className="feedback-form" onSubmit={handleSubmit}>
           <div className="feedback-stars">
             {[1, 2, 3, 4, 5].map((star) => (
-              <span
-                key={star}
-                className={`star ${rating >= star ? "selected" : ""}`}
-                onClick={() => setRating(star)}
-              >
+              <span key={star} className={`star ${rating >= star ? "selected" : ""}`} onClick={() => setRating(star)}>
                 ★
               </span>
             ))}

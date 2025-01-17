@@ -24,6 +24,17 @@ This project is made as part of the _Agile Software Engineering_ module at the F
 
 ## How to start the project
 
+### Configuration
+
+The default configuration points to http://127.0.0.1:8000/. In case this is not sufficient for you, you can change the host and/or port in the following places:
+
+- for the backend:
+  - **config.py** - change the host/port number and the debugging settings
+- for the frontend:
+  - **vite.config.ts** - change the target location of the '/api'
+
+Please make sure, that the backend and frontend points to the same place.
+
 ### Backend
 
 - make sure you have python/python3 on your computer

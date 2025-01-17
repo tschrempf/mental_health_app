@@ -16,7 +16,7 @@ const RecommendationPage = () => {
 
   const fetchWeather = async (): Promise<void> => {
     try {
-      const response = await axios.get("http://127.0.0.1:8000/weather");
+      const response = await axios.get("/api/weather");
       setWeather(response.data);
     } catch (error) {
       console.error(error);
@@ -26,7 +26,7 @@ const RecommendationPage = () => {
   const fetchRecommendations = async (): Promise<void> => {
     try {
       const response = await axios.get(
-        `http://127.0.0.1:8000/recommendations?energy_level=${selections.energy}&interest=${selections.activity}`
+        `/api/recommendations?energy_level=${selections.energy}&interest=${selections.activity}`
       );
       setRecommendationContent(mapRecommendationToCard(response.data.recommendations));
     } catch (error) {
@@ -71,11 +71,11 @@ const RecommendationPage = () => {
             lineHeight: "1.8", // Optional: Zeilenabstand angepasst
           }}
         >
-          Unsere Empfehlungen basieren auf dem aktuellen Wetter und sollen dir helfen, Aktivitäten zu finden, die dir guttun – 
-          sowohl für deinen Körper als auch für deine Seele. Natürlich gibt es noch viele andere Dinge, die dir helfen können, 
-          dich wohlzufühlen. Sieh unsere Vorschläge als kleine Inspiration. Deine mentale Gesundheit ist wichtig, und das Wetter 
-          kann deine Stimmung stark beeinflussen. Egal ob Sonnenschein, Regen oder Schnee – mit den richtigen Aktivitäten kannst 
-          du das Beste aus jedem Tag herausholen und dich dabei besser fühlen.
+          Unsere Empfehlungen basieren auf dem aktuellen Wetter und sollen dir helfen, Aktivitäten zu finden, die dir
+          guttun – sowohl für deinen Körper als auch für deine Seele. Natürlich gibt es noch viele andere Dinge, die dir
+          helfen können, dich wohlzufühlen. Sieh unsere Vorschläge als kleine Inspiration. Deine mentale Gesundheit ist
+          wichtig, und das Wetter kann deine Stimmung stark beeinflussen. Egal ob Sonnenschein, Regen oder Schnee – mit
+          den richtigen Aktivitäten kannst du das Beste aus jedem Tag herausholen und dich dabei besser fühlen.
         </Typography>
 
         <div className="carousel-bottom">

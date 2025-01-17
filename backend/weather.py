@@ -3,13 +3,13 @@ from flask import Blueprint, jsonify
 
 # Open-Meteo API-Details
 OPEN_METEO_URL = 'https://api.open-meteo.com/v1/forecast'
-LATITUDE = 48.2082  # Wien
-LONGITUDE = 16.3738  # Wien
+LATITUDE = 48.2082  # Vienna
+LONGITUDE = 16.3738  # Vienna
 
-# Blueprint für Wetter
+# Blueprint for the weather endpoint
 weather_bp = Blueprint('weather', __name__)
 
-# Funktion: Wetterdaten abrufen
+# Function: fetch weather data
 def fetch_weather():
     params = {
         'latitude': LATITUDE,
@@ -23,7 +23,7 @@ def fetch_weather():
     weather_data = response.json()
     weather_code = weather_data['current_weather']['weathercode']
     
-    # Wettercode auf Wetterbedingungen mappen
+    # Map the weather code to a weather description
     weather_map = {
         0: 'sunny',
         1: 'cloudy',
@@ -62,7 +62,7 @@ def fetch_weather():
     weather = format_weather(weather_map.get(weather_code, 'sonnig'))  # Standard: sonnig
     return weather, 200
 
-# Route: Wetterdaten abrufen
+# Route: fetch weather data
 @weather_bp.route('/weather', methods=['GET'])
 def weather_endpoint():
     weather, status = fetch_weather()
