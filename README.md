@@ -53,10 +53,6 @@ Please make sure, that the backend and frontend points to the same place.
 - `npm install` - install dependencies
 - `npm run dev` - run the frontend project
 
-## Dependencies and used libraries
-
-TBD
-
 # How to use the app
 
 Using the BrightenUp app is simple and intuitive:
