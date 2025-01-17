@@ -23,9 +23,11 @@ const Card: React.FC<CardType> = ({ title, text, imageUrl, resourceLink, videoUr
         <div className="media-container">
           <iframe
             src={videoUrl}
+            allowFullScreen
             height="150"
             width="100%"
             title="YouTube video player"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
             referrerPolicy="strict-origin-when-cross-origin"
           ></iframe>
         </div>

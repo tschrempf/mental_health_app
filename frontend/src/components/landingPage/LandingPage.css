@@ -46,12 +46,12 @@
   font-size: 0.9rem !important;
 }
 
-/* Basis-Styling für größere Bildschirme */
+/* Basis-Styling for bigger screens */
 .landing-page {
   padding: 1rem;
 }
 
-/* Ab Tablet-Breite (768px) */
+/* From tablet-width (768px) */
 @media (max-width: 768px) {
   .content {
     max-width: 90%;
@@ -73,7 +73,7 @@
   }
 }
 
-/* Für kleinere Mobilgeräte (480px und kleiner) */
+/* For smaller mobile devices (480px and smaller) */
 @media (max-width: 480px) {
   .content {
     max-width: 90%;
