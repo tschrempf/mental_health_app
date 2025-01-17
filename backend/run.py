@@ -1,5 +1,5 @@
 from recommendation import get_recommendation
-from flask import Flask, request, jsonify, g, send_file
+from flask import Flask, request, jsonify, send_file
 from flask_cors import CORS
 from weather import weather_bp
 from feedback import get_feedback_from_db, save_feedback
@@ -10,12 +10,6 @@ app = Flask(__name__)
 cors = CORS(app, origins="*")
 app.register_blueprint(weather_bp)
 
-
-@app.teardown_appcontext
-def close_db_connection(exception):
-    db = g.pop('db', None)
-    if db is not None:
-        db.close()
 
 # Route: Main Page
 @app.route('/')
