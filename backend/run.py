@@ -47,6 +47,6 @@ def recommendations_endpoint():
     return recommendations
     
 
-# Start der Flask-Anwendung
+# Start the app 
 if __name__ == '__main__':
     app.run(debug=config.DEBUG, port=config.PORT, host=config.IP)

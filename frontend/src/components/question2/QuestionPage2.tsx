@@ -11,11 +11,11 @@ import "./QuestionPage2.css";
 
 const QuestionPage2: React.FC = () => {
   const navigate = useNavigate();
-  const location = useLocation(); // <-- Hinzufügen
+  const location = useLocation(); // <-- Add
   const { setSelection } = useSelection();
   const [value, setValue] = useState("");
 
-  // Den Namen aus dem Zustand abrufen (falls vorhanden)
+  // Retrieve the name from the state (if available)
   const name = location.state?.name || "";
 
   useEffect(() => {
@@ -26,7 +26,7 @@ const QuestionPage2: React.FC = () => {
     console.log("Energy:", value);
     setValue(value);
     setSelection("energy", value);
-    navigate(`/recommendation`, { state: { name } }); // Name weitergeben
+    navigate(`/recommendation`, { state: { name } }); // Give the name to the next page
   };
 
   const energyOptions = [

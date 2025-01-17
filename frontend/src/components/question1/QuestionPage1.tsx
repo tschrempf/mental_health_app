@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Typography } from "@mui/material";
-import { useNavigate, useLocation } from "react-router-dom"; // <-- useLocation importieren
+import { useNavigate, useLocation } from "react-router-dom"; // <-- import useLocation 
 import LocationCityIcon from "@mui/icons-material/LocationCity";
 import FitnessCenterIcon from "@mui/icons-material/FitnessCenter";
 import SelfImprovementIcon from "@mui/icons-material/SelfImprovement";
@@ -23,7 +23,7 @@ const QuestionPage1: React.FC = () => {
   const { setSelection } = useSelection();
   const [value, setValue] = useState("");
 
-  // Den Namen aus dem Zustand abrufen
+  // Retrieve the name from the state (if available)
   const name = location.state?.name || "";
 
   useEffect(() => {
@@ -34,7 +34,7 @@ const QuestionPage1: React.FC = () => {
     console.log("Selected:", value);
     setValue(value);
     setSelection("activity", value);
-    navigate("/question2", { state: { name } }); // Name an die nächste Seite weitergeben
+    navigate("/question2", { state: { name } }); // Give the name to the next page
   };
 
   return (

@@ -5,14 +5,14 @@ body {
   font-family: Arial, sans-serif;
   display: flex;
   flex-direction: column;
-  min-height: 100vh; /* Damit die Fußzeile unten bleibt */
+  min-height: 100vh; /* To make footnote stay at bottom */
 }
 
 .feedback-container {
-  flex: 1; /* Nimmt den gesamten verfügbaren Platz ein */
+  flex: 1; /* Takes up all the available space */
   margin: 1.5rem auto;
-  width: 100%; /* Nimmt die gesamte Breite ein */
-  max-width: 1200px; /* Begrenzung der Breite */
+  width: 100%; /* Takes up all the width */
+  max-width: 1200px; /* Limits the width */
   padding: 2rem;
   text-align: center;
   color: #333;
@@ -22,7 +22,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: calc(100vh - 100px); /* Abzug für die Fußzeile, wenn diese eine Höhe von 100px hat */
+  height: calc(100vh - 100px); /* Deduction of the footnote, when the height is 100px */
   box-sizing: border-box;
 }
 
@@ -103,7 +103,7 @@ body {
   padding: 1rem;
   background-color: #fff;
   border-top: 1px solid #ddd;
-  margin-top: auto; /* Platziert die Fußzeile am unteren Rand */
+  margin-top: auto; /* Places the footnote at the bottom edge */
   box-sizing: border-box;
 }
 
@@ -119,7 +119,7 @@ body {
   .feedback-container {
     max-width: 90%;
     padding: 1rem;
-    height: auto; /* Passt die Höhe automatisch an */
+    height: auto; /* adjusts the height automatically */
   }
 
   .feedback-title {

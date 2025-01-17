@@ -53,13 +53,13 @@ def fetch_weather():
         99: 'rain'
     }
     
-    # Wetterwert formatieren
+    # Weather formatting
     def format_weather(weather):
         if weather == 'windy':
-            return 'windy'  # Ausnahme für 'windig'
-        return weather.capitalize()  # Erster Buchstabe groß, Rest klein
+            return 'windy'  # Exception for 'windy'
+        return weather.capitalize()  # First letter capitalized, rest lower case
 
-    weather = format_weather(weather_map.get(weather_code, 'sonnig'))  # Standard: sonnig
+    weather = format_weather(weather_map.get(weather_code, 'sonnig'))  # Standard: sunny
     return weather, 200
 
 # Route: fetch weather data
