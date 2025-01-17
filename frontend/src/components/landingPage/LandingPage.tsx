@@ -14,7 +14,7 @@ const LandingPage = () => {
   return (
     <div className="landing-page">
       <div className="content">
-        <img src="/public/brightenUp.png" alt="Brighten" style={{ marginBottom: "-8%", marginTop: "-3%" }} />
+        <img src="/brightenUp.png" alt="Brighten" style={{ marginBottom: "-8%", marginTop: "-3%" }} />
         <Typography
           variant="h3"
           className="title"
